@@ -34,16 +34,20 @@ class ReviewItem extends StatelessWidget {
                           text: product.reviews[index].reviewerName,
                           style: TextStyles.font14BlackNormal),
                       TextSpan(
-                          text: '(⭐ ${product.reviews[index].rating})',
-                          style: TextStyles.font18primaryBold
-                              .copyWith(fontSize: 15)),
+                        text: '(⭐ ${product.reviews[index].rating})',
+                        style:
+                            TextStyles.font18primaryBold.copyWith(fontSize: 15),
+                      ),
                     ],
                   ),
                 ),
                 vertcalSpace(6),
-                Text(product.reviews[index].date,
-                    style: TextStyles.font16GrayNormal
-                        .copyWith(fontWeight: FontWeight.bold)),
+                Text(
+                  product.reviews[index].date,
+                  style: TextStyles.font16GrayNormal.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             )
           ],
@@ -57,7 +61,9 @@ class ReviewItem extends StatelessWidget {
                   style: TextStyles.font18primaryBold.copyWith(fontSize: 16)),
               TextSpan(
                 text: product.reviews[index].comment,
-                style: TextStyles.font18BlackBold.copyWith(fontSize: 16),
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      fontSize: 16,
+                    ),
               ),
             ],
           ),

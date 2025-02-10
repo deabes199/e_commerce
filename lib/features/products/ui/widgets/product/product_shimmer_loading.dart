@@ -22,36 +22,48 @@ class ProductGridViewShimmerLoading extends StatelessWidget {
               Stack(
                 children: [
                   Shimmer.fromColors(
-                      child: Container(
-                        height: 180,
-                        width: 180,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15)),
-                      ),
-                      baseColor: Colors.grey,
-                      highlightColor: Colors.white),
-                  vertcalSpace(10),
-                  Row(
+                    baseColor: Theme.of(context).brightness == Brightness.light
+                        ? Colors.grey[300]!
+                        : Colors.black,
+                    highlightColor: Theme.of(context).highlightColor,
+                    child: Container(
+                      height: 180,
+                      width: 180,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          borderRadius: BorderRadius.circular(15)),
+                    ),
+                  ),
+                ],
+              ),
+              vertcalSpace(10),
+              Row(
+                children: [
+                  Column(
                     children: [
-                      Column(
-                        children: [
-                          Shimmer.fromColors(
-                              child: Container(
-                                height: 25,
-                                width: 100,
-                              ),
-                              baseColor: Colors.grey.shade300,
-                              highlightColor: Colors.white),
-                          Shimmer.fromColors(
-                              child: Container(
-                                height: 18,
-                                width: 100,
-                              ),
-                              baseColor: Colors.grey.shade300,
-                              highlightColor: Colors.white),
-                        ],
-                      )
+                      Shimmer.fromColors(
+                          baseColor:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.grey[300]!
+                                  : Colors.black,
+                          highlightColor: Theme.of(context).highlightColor,
+                          child: Container(
+                            height: 25,
+                            width: 100,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          )),
+                      vertcalSpace(3),
+                      Shimmer.fromColors(
+                          baseColor:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.grey[300]!
+                                  : Colors.black,
+                          highlightColor: Theme.of(context).highlightColor,
+                          child: Container(
+                            height: 18,
+                            width: 100,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          )),
                     ],
                   )
                 ],

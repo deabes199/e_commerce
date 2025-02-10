@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hero_store_app/core/theming/app_colors.dart';
 import 'package:hero_store_app/features/wishList/logic/cubit/favorites_cubit.dart';
 import 'package:hero_store_app/features/products/data/models/product_model.dart';
 
@@ -39,7 +40,9 @@ class FavoriteIcon extends StatelessWidget {
         height: 40,
         width: 40,
         decoration: BoxDecoration(
-          color: Colors.grey.shade300,
+          color: Theme.of(context).brightness == Brightness.light
+              ? AppColors.lighterGray
+              : Colors.black.withOpacity(0.5),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Icon(

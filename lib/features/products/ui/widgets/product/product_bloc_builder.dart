@@ -17,9 +17,7 @@ class ProductBlocBuilder extends StatelessWidget {
           if (state is ProductSuccess) {
             return ProductsGridView(productList: state.productList);
           } else if (state is ProductFaliure) {
-            return Container(
-              child: Text(state.message),
-            );
+            return Text(state.message);
           } else {
             return const SizedBox.shrink();
           }

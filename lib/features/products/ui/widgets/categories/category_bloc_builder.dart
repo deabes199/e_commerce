@@ -5,8 +5,6 @@ import 'package:hero_store_app/features/products/logic/cubit/category_cubit.dart
 import 'package:hero_store_app/features/products/ui/widgets/categories/categoris_list_view.dart';
 import 'package:hero_store_app/features/products/ui/widgets/categories/category_shimmer.dart';
 import 'package:hero_store_app/features/products/ui/widgets/categories/expanded_product_shimmer_loading.dart';
-import 'package:hero_store_app/features/products/ui/widgets/product/product_shimmer_loading.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CategoryListBlocBuilder extends StatelessWidget {
   const CategoryListBlocBuilder({super.key});
@@ -24,7 +22,7 @@ class CategoryListBlocBuilder extends StatelessWidget {
           } else if (state is CategorySuccess) {
             return CategorisListView(categoryList: state.categoryList);
           } else if (state is CategoryFaliure) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else {
             return const SizedBox.shrink();
           }

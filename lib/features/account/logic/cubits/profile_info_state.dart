@@ -19,9 +19,17 @@ final class ProfileInfoFaliure extends ProfileInfoState {
   ProfileInfoFaliure({required this.message});
 }
 
-final class UpdatetNameSuccessfully extends ProfileInfoState {}
+final class UpdatedNameSuccessfully extends ProfileInfoState {
+  final String name;
 
-final class UpdatetPhoneSuccessfully extends ProfileInfoState {}
+  UpdatedNameSuccessfully({required this.name});
+}
+
+final class UpdatedPhoneSuccessfully extends ProfileInfoState {
+  final String phone;
+
+  UpdatedPhoneSuccessfully({required this.phone});
+}
 
 final class UpdatetFaliure extends ProfileInfoState {
   final String message;
@@ -29,8 +37,26 @@ final class UpdatetFaliure extends ProfileInfoState {
   UpdatetFaliure({required this.message});
 }
 
-
 //////// image upload/////////////////////
 
+final class ImageInitial extends ProfileInfoState {}
 
+final class UpdateProfileImageSuccessfully extends ProfileInfoState {
+  final String imageUrl;
 
+  UpdateProfileImageSuccessfully({required this.imageUrl});
+}
+
+class UpdateProfileImageFaliure extends ProfileInfoState {
+  final String message;
+
+  UpdateProfileImageFaliure({required this.message});
+}
+
+class UploadProfileImageLoading extends ProfileInfoState {}
+
+class PickImageSuccess extends ProfileInfoState {
+  final File? image;
+
+  PickImageSuccess({required this.image});
+}

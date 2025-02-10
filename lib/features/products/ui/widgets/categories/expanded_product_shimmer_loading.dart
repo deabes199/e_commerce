@@ -16,48 +16,73 @@ class ExpandedProductGridViewShimmer extends StatelessWidget {
             childAspectRatio: 0.7,
           ),
           itemBuilder: (context, index) {
+              final theme = Theme.of(context);
             return Column(
-              children: [
-                Stack(
-                  children: [
-                    Shimmer.fromColors(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+              
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: 
+                     Shimmer.fromColors(
+                        baseColor: theme.cardColor,
+                        highlightColor: theme.highlightColor,
                         child: Container(
                           height: 180,
                           width: 180,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15)),
+                          color: Colors.white,
                         ),
-                        baseColor: Colors.grey.shade300,
-                        highlightColor: Colors.white),
-                    vertcalSpace(10),
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Shimmer.fromColors(
-                                child: Container(
-                                  height: 25,
-                                  width: 100,
-                                ),
-                                baseColor: Colors.grey.shade300,
-                                highlightColor: Colors.white),
-                            Shimmer.fromColors(
-                                child: Container(
-                                  height: 18,
-                                  width: 100,
-                                ),
-                                baseColor: Colors.grey.shade300,
-                                highlightColor: Colors.white),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                )
+                      )
+                  
+              ),
+            ),
+            
+          ],
+        ),
+        vertcalSpace(10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              
+                     Shimmer.fromColors(
+                        baseColor: theme.cardColor,
+                        highlightColor: theme.highlightColor,
+                        child: Container(
+                          height: 16,
+                          width: 100,
+                          color: Colors.white,
+                        ),
+                      ),
+                 
+               Shimmer.fromColors(
+                        baseColor: theme.cardColor,
+                        highlightColor: theme.highlightColor,
+                        child: Container(
+                          height: 18,
+                          width: 50,
+                          color: Colors.white,
+                        ),
+                      )
+                 
               ],
-            );
+            ),
+         
+          ],
+        ),
+      ],
+    );
           }),
     );
   }
 }
+
+

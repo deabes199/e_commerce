@@ -22,13 +22,15 @@ final class SignupFailure extends SignupState {
 // image
 
 final class PickImageSuccess extends SignupState {
-  final File? image;
+  final File image;
 
   PickImageSuccess({required this.image});
 }
-final class PickImageFaliure extends SignupState {
-  final String message;
 
-  PickImageFaliure({required this.message});
+final class PickImageFailure extends SignupState {
+  final String error;
+
+  PickImageFailure({required this.error});
 }
 
+final class PickImageCancelled extends SignupState {}

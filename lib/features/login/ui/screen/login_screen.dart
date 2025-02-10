@@ -5,6 +5,7 @@ import 'package:hero_store_app/core/widgets/screen_message.dart';
 import 'package:hero_store_app/features/login/ui/widgets/login/dont_have_an_account.dart';
 import 'package:hero_store_app/features/login/ui/widgets/login/email_and_password_login.dart';
 import 'package:hero_store_app/features/login/ui/widgets/login/login_bloc_listener.dart';
+import 'package:hero_store_app/features/signup/ui/screen/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -26,6 +27,7 @@ class LoginScreen extends StatelessWidget {
                 vertcalSpace(20),
                 const DontHaveAnAccountText(),
                 const LoginBlocListener(),
+                // AddImageSignUp()
               ],
             ),
           ),

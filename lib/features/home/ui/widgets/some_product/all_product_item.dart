@@ -66,13 +66,22 @@ class AllProductItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           product.title ?? '',
-                          // style: TextStyles.font18BlackBold
-                          //     .copyWith(fontSize: 16)
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall
+                              ?.copyWith(fontSize: 16),
                         ),
                         Flexible(
-                          child: Text('\$ ${product.price.toString()}',
-                              style: TextStyles.font18primaryBold
-                                  .copyWith(fontSize: 16)),
+                          child: Text(
+                            '\$ ${product.price.toString()}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall
+                                ?.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryColor),
+                          ),
                         ),
                       ],
                     ),

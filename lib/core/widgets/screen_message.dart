@@ -7,12 +7,8 @@ class ScreenMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: const TextStyle(
-          fontSize: 35,
-          fontWeight: FontWeight.bold,
-          color: AppColors.primaryColor),
-    );
+    return Text(text,
+        style: Theme.of(context).textTheme.displayLarge?.copyWith(
+            color: AppColors.primaryColor, fontWeight: FontWeight.bold));
   }
 }

@@ -78,26 +78,31 @@ class ProfileRepo {
       return left(ErrorModel(error.toString()));
     }
   }
-  Future<Either<ErrorModel,String>> updateImage(File imageFile)async{
+
+  Future<Either<ErrorModel, String>> updateImage(File imageFile) async {
     try {
-      String fileName=DateTime.now().millisecondsSinceEpoch.toString();
-      final refStoarge= FirebaseStorage.instance.ref().child('users/$fileName');
-      UploadTask uploadTask=refStoarge.putFile(imageFile);
-      TaskSnapshot taskSnapshot= await uploadTask.whenComplete(()=>null);
-      String downloadUrl=await taskSnapshot.ref.getDownloadURL();
-      final userRef=firestore.collection('users').doc(await SecureStorageHelper.getSecuredString(AppConstant.userToken));
-      await userRef.update({'image':downloadUrl});
+      String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final refStoarge =
+          FirebaseStorage.instance.ref().child('users/$fileName');
+      UploadTask uploadTask = refStoarge.putFile(imageFile);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      final userToken =
+          await SecureStorageHelper.getSecuredString(AppConstant.userToken);
+      if (userToken == null) {
+        return left(FirebaseStorageFailure('User not found'));
+      }
+      final userRef = firestore
+          .collection('users')
+          .doc(userToken);
+      await userRef.update({'image': downloadUrl});
       return right(downloadUrl);
     } catch (error) {
-      if(error is FirebaseException){
+      if (error is FirebaseException) {
         return left(FirebaseStorageFailure.fromFirebaseCoreException(error));
-      }else{
+      } else {
         return left(FirebaseStorageFailure(error.toString()));
       }
-      
     }
-    
   }
-
-  
 }

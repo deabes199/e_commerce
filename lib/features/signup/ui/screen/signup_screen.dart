@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hero_store_app/core/helpers/spacing.dart';
 import 'package:hero_store_app/core/widgets/screen_message.dart';
-import 'package:hero_store_app/features/signup/logic/cubit/signup_cubit.dart';
+import 'package:hero_store_app/features/signup/ui/widgets/add_image.dart';
 import 'package:hero_store_app/features/signup/ui/widgets/signup_bloc_listener.dart';
 import 'package:hero_store_app/features/signup/ui/widgets/signup_text_fields.dart';
 
@@ -24,7 +23,8 @@ class SignupScreen extends StatelessWidget {
             children: [
               vertcalSpace(20),
               const ScreenMessage(text: 'Create\nan account'),
-           
+              vertcalSpace(20),
+              const AddImageSignUp(),
               vertcalSpace(20),
               const SignupTextFieldAndButton(),
               vertcalSpace(30),
@@ -37,4 +37,3 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
-

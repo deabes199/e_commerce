@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hero_store_app/core/theming/text_style.dart';
-import 'package:hero_store_app/core/widgets/custom_circle_container.dart';
 
 class CustomTabBarWidget extends StatelessWidget {
   const CustomTabBarWidget(
@@ -23,7 +21,13 @@ class CustomTabBarWidget extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        Text(title, style: TextStyles.font22BlackBold),
+        Text(
+          title,
+          style: Theme.of(context)
+              .textTheme
+              .displayMedium
+              ?.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
         widget,
       ],
     );

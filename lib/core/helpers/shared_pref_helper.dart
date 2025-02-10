@@ -1,16 +1,13 @@
-
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefHelper {
- static late SharedPreferences sharedPreferences;
+class CacheHelper {
+  late SharedPreferences sharedPreferences;
 
-//! Here The Initialize of cache .
+  //Here The Initialize of cache .
+
   init() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
-
-//! this method to put data in local database using key
 
   String? getDataString({
     required String key,
@@ -18,48 +15,46 @@ class SharedPrefHelper {
     return sharedPreferences.getString(key);
   }
 
-//! this method to put data in local database using key
+// this fun to put data in local data base using key
 
-static Future<bool> setData(String key, value, ) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
-    switch (value.runtimeType) {
-      case const (String):
-        return await sharedPreferences.setString(key, value);
-      case const (int):
-        return await sharedPreferences.setInt(key, value);
-      case const (bool):
-        return await sharedPreferences.setBool(key, value);
-      case const (double):
-        return await sharedPreferences.setDouble(key, value);
-      default:
-        return false;
+  Future<bool> saveData({required String key, required dynamic value}) async {
+    if (value is bool) {
+      return await sharedPreferences.setBool(key, value);
+    }
+    if (value is String) {
+      return await sharedPreferences.setString(key, value);
+      
+    }
+
+    if (value is int) {
+      return await sharedPreferences.setInt(key, value);
+    } else {
+      return await sharedPreferences.setDouble(key, value);
     }
   }
 
-//! this method to get data already saved in local database
+  // this fun to get data already saved in local data base
 
   dynamic getData({required String key}) {
     return sharedPreferences.get(key);
   }
 
-//! remove data using specific key
+// remove data using specific key
 
   Future<bool> removeData({required String key}) async {
     return await sharedPreferences.remove(key);
   }
 
-//! this method to check if local database contains {key}
   Future<bool> containsKey({required String key}) async {
     return sharedPreferences.containsKey(key);
   }
 
-//! clear all data in the local database
+  //clear all data in the local data base
   Future<bool> clearData() async {
     return await sharedPreferences.clear();
   }
 
-//! this method to put data in local database using key
+  // this fun to put data in local data base using key
   Future<dynamic> put({
     required String key,
     required dynamic value,

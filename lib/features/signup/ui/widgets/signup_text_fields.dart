@@ -15,12 +15,13 @@ class SignupTextFieldAndButton extends StatefulWidget {
 }
 
 class _SignupTextFieldAndButtonState extends State<SignupTextFieldAndButton> {
+  GlobalKey<FormState> signupKey = GlobalKey<FormState>();
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     var signUpCubit = context.read<SignupCubit>();
     return Form(
-      key: signUpCubit.signupKey,
+      key: signupKey,
       child: Column(
         children: [
           AppTextFormField(
@@ -96,7 +97,7 @@ class _SignupTextFieldAndButtonState extends State<SignupTextFieldAndButton> {
             label: 'Create Account',
             color: AppColors.primaryColor,
             ontap: () async {
-              if (signUpCubit.signupKey.currentState!.validate()) {
+              if (signupKey.currentState!.validate()) {
                 await signUpCubit.signUp();
               }
             },

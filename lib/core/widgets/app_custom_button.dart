@@ -16,16 +16,17 @@ class AppCustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: width,
         height: height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: color),
           onPressed: ontap,
-          child: Text(
-            label,
-            style: TextStyle(color: Colors.white, fontSize: 22),
-          ),
+          child: Text(label,
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall
+                  ?.copyWith(fontSize: 16, color: Colors.white)),
         ));
   }
 }

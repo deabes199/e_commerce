@@ -2,18 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hero_store_app/bloc_observer.dart';
 import 'package:hero_store_app/core/helpers/extentions.dart';
-import 'package:hero_store_app/core/helpers/spacing.dart';
 import 'package:hero_store_app/core/routing/routes.dart';
 import 'package:hero_store_app/core/theming/cubit/theme_cubit.dart';
 import 'package:hero_store_app/core/theming/theme_dialog.dart';
-import 'package:hero_store_app/features/account/ui/widgets/profile_details/profile_details_tab_bar.dart';
-import 'package:hero_store_app/features/account/ui/widgets/profile_details/profile_image.dart';
-import 'package:hero_store_app/features/account/ui/widgets/profile_details/username_and_email_bloc_builder.dart';
+import 'package:hero_store_app/features/account/ui/widgets/custom_listtile.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, });
+  
 
   @override
   Widget build(BuildContext context) {
@@ -25,31 +22,51 @@ class ProfileScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const ProfileDetailsTabBar(),
-                vertcalSpace(20),
-                const ProfileImage(),
-                vertcalSpace(40),
-                const UsernameAndEmailBlocBuilder(),
-                vertcalSpace(20),
-                GestureDetector(
-                  onTap: () async {
-                    await FirebaseAuth.instance.signOut();
-                    context.pushNamed(Routes.loginScreen);
-                  },
-                  child: const Text(
-                    'Sign Out',
-                    style: TextStyle(color: Colors.red, fontSize: 20),
+                const Center(
+                  child: Text(
+                    'Profile',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
-                vertcalSpace(20),
-                GestureDetector(
+                CustomListTile(
+                  iconData: Icons.person,
+                  title: 'Profile Details',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.profileDetailsScreen);
+                  },
+                ),
+                CustomListTile(
+                  iconData: Icons.favorite,
+                  title: 'WishList',
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.wishlistScreen);
+                  },
+                ),
+                CustomListTile(
+                  iconData: Icons.edit,
+                  title: 'Edit Profile',
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.editProfileScreen,
+                    );
+                  },
+                ),
+                CustomListTile(
+                  iconData: Icons.mode_night,
+                  title: 'Change Theme',
                   onTap: () {
                     changeThemeDialog(context, themeCubit);
                   },
-                  child: const Text(
-                    'Change Theme',
-                    style: TextStyle(color: Colors.blue, fontSize: 20),
-                  ),
+                ),
+                CustomListTile(
+                  iconData: Icons.logout,
+                  title: 'SignOut',
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    // ignore: use_build_context_synchronously
+                    context.pushNamed(Routes.loginScreen);
+                  },
                 ),
               ],
             ),
@@ -59,4 +76,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-

@@ -11,11 +11,11 @@ class UsernameAndEmailBlocBuilder extends StatelessWidget {
     return BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
         builder: (context, state) {
       if (state is ProfileInfoLoading) {
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       } else if (state is ProfileInfoSuccess) {
         return UserNameAndEmail(user: state.newUser);
       } else {
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       }
     });
   }

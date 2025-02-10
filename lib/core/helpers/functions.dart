@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hero_store_app/core/helpers/app_constant.dart';
 import 'package:hero_store_app/core/helpers/flutter_secure_stoarge.dart';
 import 'package:hero_store_app/features/signup/data/models/signup_response_model.dart';
-import 'package:hero_store_app/main.dart';
 import 'package:hero_store_app/core/helpers/extentions.dart';
+import 'package:hero_store_app/main_production.dart';
 
 
 class HelperFunctions {

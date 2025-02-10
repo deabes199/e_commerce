@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hero_store_app/bloc_observer.dart';
 import 'package:hero_store_app/core/helpers/spacing.dart';
 import 'package:hero_store_app/core/theming/app_colors.dart';
 import 'package:hero_store_app/core/widgets/custom_circle_container.dart';
 import 'package:hero_store_app/features/wishList/logic/cubit/favorites_cubit.dart';
 import 'package:hero_store_app/features/products/data/models/product_model.dart';
 
-class ProductItems extends StatefulWidget {
+class ProductItems extends StatelessWidget {
   const ProductItems({super.key, required this.product});
   final Product product;
 
   @override
-  State<ProductItems> createState() => _ProductItemsState();
-}
-
-class _ProductItemsState extends State<ProductItems> {
-  @override
-  // void initState() {
-
-  //   super.initState();
-  //    context.read<ProductDetailsCubit>().getFavorites();
-  // }
+  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
@@ -40,7 +30,7 @@ class _ProductItemsState extends State<ProductItems> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
-                      widget.product.mainImage.toString(),
+                      product.mainImage.toString(),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -48,7 +38,7 @@ class _ProductItemsState extends State<ProductItems> {
                 Positioned(
                     top: 10,
                     right: 10,
-                    child: FavoriteIcon(product: widget.product))
+                    child: FavoriteIcon(product: product))
               ],
             ),
             vertcalSpace(6),
@@ -62,12 +52,12 @@ class _ProductItemsState extends State<ProductItems> {
                       Text(
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
-                        widget.product.title ?? 'No',
+                        product.title ?? 'No',
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '\$ ${widget.product.price.toString()}',
+                        '\$ ${product.price.toString()}',
                         style: const TextStyle(
                             fontSize: 18, color: AppColors.primaryColor),
                       ),

@@ -9,13 +9,38 @@ import 'package:meta/meta.dart';
 part 'profile_info_state.dart';
 
 class ProfileInfoCubit extends Cubit<ProfileInfoState> {
-  ProfileInfoCubit(this.profileRepo) : super(ProfileInfoInitial());
+  ProfileInfoCubit(
+    this.profileRepo,
+  ) : super(ProfileInfoInitial());
   final ProfileRepo profileRepo;
+
   TextEditingController newName = TextEditingController();
   TextEditingController newPhone = TextEditingController();
   GlobalKey<FormState> updateKey = GlobalKey();
-  String imageUrll = '';
+
   File? image;
+  String imageUrll = '';
+
+  pickImage() async {
+    final response = await profileRepo.pickImage();
+    response.fold((error) {
+      emit(UpdateProfileImageFaliure(message: error.message));
+    }, (imageFile) {
+      image = imageFile;
+      emit(PickImageSuccess(image: image));
+    });
+  }
+
+  updateUserImage() async {
+    emit(UploadProfileImageLoading());
+    final response = await profileRepo.updateImage(image!);
+    response.fold((error) {
+      emit(UpdateProfileImageFaliure(message: error.message));
+    }, (imageUrl) {
+      imageUrll = imageUrl;
+      emit(UpdateProfileImageSuccessfully(imageUrl: imageUrl));
+    });
+  }
 
   displayProfileInfo() async {
     emit(ProfileInfoLoading());
@@ -31,7 +56,7 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> {
     await profileRepo.updateName(
       newName.text,
     );
-    emit(UpdatetNameSuccessfully());
+    emit(UpdatedNameSuccessfully(name: newName.text));
     final response = await profileRepo.displayProfileInfo();
     response.fold((error) {
       emit(UpdatetFaliure(message: error.message));
@@ -42,7 +67,7 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> {
 
   updatePhone() async {
     await profileRepo.updatePhoneNumber(newPhone.text);
-    emit(UpdatetPhoneSuccessfully());
+    emit(UpdatedPhoneSuccessfully(phone: newPhone.text));
     final response = await profileRepo.displayProfileInfo();
     response.fold((error) {
       emit(ProfileInfoFaliure(message: error.message));
@@ -50,7 +75,4 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> {
       emit(ProfileInfoSuccess(newUser: user));
     });
   }
-  ////// image////////////
-
- 
 }

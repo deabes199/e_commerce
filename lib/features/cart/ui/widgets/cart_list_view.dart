@@ -13,9 +13,19 @@ class CartListView extends StatelessWidget {
       builder: (context, state) {
         return context.read<AddCartsCubit>().cartList.isEmpty
             ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  vertcalSpace(100),
-                  Image.asset('assets/images/aa.jpg')
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                  ),
+                  Center(
+                      child: Text(
+                    'Your cart is empty !',
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge
+                        ?.copyWith(fontSize: 20),
+                  ))
                 ],
               )
             : Expanded(

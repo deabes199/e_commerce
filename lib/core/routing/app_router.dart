@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hero_store_app/bottom_nav_bar_screen.dart';
+import 'package:hero_store_app/features/account/ui/screens/profile_details_screen.dart';
+import 'package:hero_store_app/features/signup/data/models/signup_response_model.dart';
+import 'package:hero_store_app/nav_bar/logic/cubit/nav_bar_cubit.dart';
+import 'package:hero_store_app/nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:hero_store_app/core/di/dependancy_injection.dart';
 import 'package:hero_store_app/core/routing/routes.dart';
 import 'package:hero_store_app/features/account/logic/cubits/cubit/image_cubit.dart';
@@ -26,6 +29,7 @@ import 'package:hero_store_app/features/signup/ui/screen/signup_screen.dart';
 import 'package:hero_store_app/features/wishList/ui/screen/wishlist_screen.dart';
 
 class AppRouter {
+  
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.productDetailScreen:
@@ -71,27 +75,33 @@ class AppRouter {
             builder: (_) => MultiBlocProvider(
                   providers: [
                     BlocProvider(
-                      create: (context) => FavoritesCubit()..getFavorites(),
+                      create: (context) => getIt<NavBarCubit>(),
                     ),
                     BlocProvider(
-                      create: (context) => AddCartsCubit()..getCarts(),
+                      create: (context) =>
+                          getIt<FavoritesCubit>()..getFavorites(),
+                    ),
+                    BlocProvider(
+                      create: (context) => getIt<AddCartsCubit>()..getCarts(),
                     ),
                   ],
                   child: const BottomNavBarScreen(),
                 ));
       case Routes.editProfileScreen:
+        final user = settings.arguments as SignupResponseModel;
+
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
                     BlocProvider(
                       create: (context) => getIt<ProfileInfoCubit>(),
                     ),
-                    BlocProvider(
-                      create: (context) =>
-                          getIt<ImageCubit>()..displayProfileImage(),
-                    ),
+                    // BlocProvider(
+                    //   create: (context) =>
+                    //       getIt<ImageCubit>(),
+                    // ),
                   ],
-                  child: const EditProfileScreen(),
+                  child:  EditProfileScreen(user:user),
                 ));
 
       case Routes.wishlistScreen:
@@ -103,15 +113,20 @@ class AppRouter {
 
       case Routes.loginScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (context) => getIt<LoginCubit>(),
-                child: const LoginScreen()));
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => getIt<LoginCubit>(),
+                    ),
+                  ],
+                  child: const LoginScreen(),
+                ));
+
       case Routes.signupScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<SignupCubit>(),
-                  child: const SignupScreen(),
-                ));
+          builder: (context) => const SignupScreen(),
+        );
+
       case Routes.forgotPasswordScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
@@ -120,6 +135,12 @@ class AppRouter {
                 ));
 
       case Routes.profileScreen:
+        final signupResponse = settings.arguments as SignupResponseModel;
+        return MaterialPageRoute(
+          builder: (context) => ProfileScreen(),
+        );
+
+      case Routes.profileDetailsScreen:
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
@@ -127,12 +148,12 @@ class AppRouter {
                       create: (context) =>
                           getIt<ProfileInfoCubit>()..displayProfileInfo(),
                     ),
-                    BlocProvider(
-                      create: (context) =>
-                          getIt<ImageCubit>()..displayProfileImage(),
-                    ),
+                    // BlocProvider(
+                    //   create: (context) =>
+                    //       getIt<ImageCubit>(),
+                    // ),
                   ],
-                  child: ProfileScreen(),
+                  child: const ProfileDetailsScreen(),
                 ));
 
       default:
@@ -142,6 +163,7 @@ class AppRouter {
           ),
         );
     }
+    return null;
   }
 
   static List<Widget> screens = [
@@ -165,16 +187,6 @@ class AppRouter {
       child: const ProductsScreen(),
     ),
     const CartScreen(),
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<ProfileInfoCubit>()..displayProfileInfo(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<ImageCubit>()..displayProfileImage(),
-        ),
-      ],
-      child: const ProfileScreen(),
-    )
+     ProfileScreen()
   ];
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hero_store_app/core/helpers/extentions.dart';
 import 'package:hero_store_app/core/routing/routes.dart';
-import 'package:hero_store_app/core/theming/app_colors.dart';
 import 'package:hero_store_app/core/widgets/app_text_form_field.dart';
 import 'package:hero_store_app/features/products/logic/search_cubit/cubit/search_cubit.dart';
 
@@ -22,13 +22,15 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
         Row(
           children: [
             IconButton(
-                onPressed: () {
-                  context.pop();
-                },
-                icon: Icon(Icons.arrow_back)),
-            Container(
-              width: 320,
+              onPressed: () {
+                context.pop();
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
+            Expanded(
               child: AppTextFormField(
+                contantPadding:
+                    EdgeInsets.symmetric(horizontal: 20.h, vertical: 14.w),
                 onChanged: (value) {
                   setState(() {
                     searchCubit.search.text = value;
@@ -36,13 +38,11 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
                   searchCubit.searchByName(value);
                 },
                 hintText: 'Search',
-                hintStyle: TextStyle(color: AppColors.primaryColor),
                 controller: searchCubit.search,
                 validator: (value) {},
                 suffixIcon: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.close,
-                    color: AppColors.primaryColor,
                   ),
                   onPressed: () {
                     searchCubit.search.clear();
@@ -50,9 +50,8 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
                         .pushReplacementNamed(Routes.searchScreen);
                   },
                 ),
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.search,
-                  color: AppColors.primaryColor,
                 ),
               ),
             ),

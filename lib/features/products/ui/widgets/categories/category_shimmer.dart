@@ -10,23 +10,27 @@ class CategoryShimmerLoading extends StatelessWidget {
     return SizedBox(
       height: 60,
       child: ListView.builder(
-        itemCount: 15,
+        itemCount: 7,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          var theme = Theme.of(context);
           return Padding(
             padding: EdgeInsetsDirectional.only(start: 16.w),
             child: Column(
               children: [
                 Shimmer.fromColors(
-                    child: Container(
-                      height: 40,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white),
-                    ),
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.white)
+                  baseColor: Theme.of(context).brightness == Brightness.light
+                      ? Colors.grey[300]!
+                      : Colors.black,
+                  highlightColor: theme.highlightColor,
+                  child: Container(
+                    height: 40,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: theme.scaffoldBackgroundColor),
+                  ),
+                )
               ],
             ),
           );

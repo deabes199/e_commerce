@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero_store_app/core/helpers/spacing.dart';
+import 'package:hero_store_app/core/routing/routes.dart';
 import 'package:hero_store_app/features/account/ui/widgets/profile_details/custom_profile_details_widget.dart';
 import 'package:hero_store_app/features/signup/data/models/signup_response_model.dart';
 
@@ -11,26 +12,39 @@ class UserNameAndEmail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Column(
+      
+        Stack(
           children: [
-            CustomProfileDetailsWidget(
-              title: 'Name',
-              subtitle: user.name,
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.editProfileScreen,
+                        arguments: user);
+                  },
+                  icon: const Icon(Icons.edit)),
             ),
-            vertcalSpace(10),
-            CustomProfileDetailsWidget(
-              title: 'Email',
-              subtitle: user.email,
-            ),
-            vertcalSpace(10),
-            CustomProfileDetailsWidget(
-              title: 'Phone Number',
-              subtitle: user.phone,
+            Column(
+              children: [
+                CustomProfileDetailsWidget(
+                  title: 'Name',
+                  subtitle: user.name,
+                ),
+                vertcalSpace(10),
+                CustomProfileDetailsWidget(
+                  title: 'Email',
+                  subtitle: user.email,
+                ),
+                vertcalSpace(10),
+                CustomProfileDetailsWidget(
+                  title: 'Phone Number',
+                  subtitle: user.phone,
+                ),
+              ],
             ),
           ],
-        ),
+        )
       ],
     );
   }
 }
-

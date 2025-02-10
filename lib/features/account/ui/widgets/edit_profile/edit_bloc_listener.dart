@@ -10,8 +10,12 @@ class UpdatedProfileBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ProfileInfoCubit, ProfileInfoState>(
       listener: (context, state) {
-        if (state is UpdatetNameSuccessfully && state is UpdatetPhoneSuccessfully) {
-           EditNameAndPhoneNumber();
+        if (state is UpdatedNameSuccessfully &&
+            state is UpdatedPhoneSuccessfully) {
+          EditNameAndPhoneNumber(
+            name: state.name,
+            phone: state.name,
+          );
         } else {
           const CircularProgressIndicator();
         }

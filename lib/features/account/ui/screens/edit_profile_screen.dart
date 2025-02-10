@@ -7,10 +7,15 @@ import 'package:hero_store_app/core/widgets/custom_tab_bar_widget.dart';
 import 'package:hero_store_app/features/account/ui/widgets/edit_profile/edit_bloc_listener.dart';
 import 'package:hero_store_app/features/account/ui/widgets/edit_profile/edit_image.dart';
 import 'package:hero_store_app/features/account/ui/widgets/edit_profile/edit_text_fields.dart';
+import 'package:hero_store_app/features/signup/data/models/signup_response_model.dart';
 import 'package:toast/toast.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen({
+    super.key, required this.user,
+  });
+  final SignupResponseModel user;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +32,17 @@ class EditProfileScreen extends StatelessWidget {
                   widget: IconButton(
                       onPressed: () {
                         context.pushReplacmentNamed(
-                          Routes.profileScreen,
+                          Routes.profileDetailsScreen,
                         );
                       },
                       icon: const Icon(Icons.done)),
                 ),
                 vertcalSpace(20),
-               const EditImageWidget(),
+               EditImage(image:user.image ,),
                 vertcalSpace(80),
-                const EditNameAndPhoneNumber(),
-                const UpdatedProfileBlocListener()
+                 EditNameAndPhoneNumber(name: user.name,phone: user.phone,),
+                const UpdatedProfileBlocListener(),
+        
               ],
             ),
           ),
@@ -45,5 +51,3 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 }
-
-

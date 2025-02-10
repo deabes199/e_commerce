@@ -32,6 +32,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    flavorDimensions "default"
+    productFlavors {
+      production {
+            dimension "default"
+            resValue "string", "app_name", "Shop Production"
+          
+        }
+      development{
+            dimension "default"
+            resValue "string", "app_name", "Shop Development"
+            applicationIdSuffix ".dev"
+
+        }
+    }
+
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).

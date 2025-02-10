@@ -20,8 +20,14 @@ class CategoiesItems extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding:
-                EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 10),
+            padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
+              color: itemIndex == selectedIndex
+                  ? AppColors.primaryColor
+                  : Theme.of(context).scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Text(
               category.name,
               style: TextStyle(
@@ -29,16 +35,9 @@ class CategoiesItems extends StatelessWidget {
                       ? Colors.white
                       : AppColors.primaryColor),
             ),
-            decoration: BoxDecoration(
-              color: itemIndex == selectedIndex
-                  ? AppColors.primaryColor
-                  : Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(10),
-            ),
           ),
         ],
       ),
     );
   }
 }
-
