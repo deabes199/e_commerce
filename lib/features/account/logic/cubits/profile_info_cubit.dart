@@ -20,19 +20,16 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> {
   GlobalKey<FormState> updateKey = GlobalKey();
 
   File? image;
-  String imageUrll = '';
 
   pickImage(ImageSource source) async {
     final response = await profileRepo.pickImage(source);
 
     response.fold((error) {
       emit(UpdateProfileImageFaliure(message: error.message));
-  
     }, (imageFile) {
       image = imageFile;
       emit(PickImageSuccess(image: image));
-          updateUserImage();
-
+      updateUserImage();
     });
   }
 
@@ -42,7 +39,6 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> {
     response.fold((error) {
       emit(UpdateProfileImageFaliure(message: error.message));
     }, (imageUrl) {
-      imageUrll = imageUrl;
       emit(UpdateProfileImageSuccessfully(imageUrl: imageUrl));
     });
   }

@@ -13,11 +13,13 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfileRepo {
   final firestore = FirebaseFirestore.instance;
+  static final token =
+      SecureStorageHelper.getSecuredString(AppConstant.userToken);
+  static const String collectionName = 'users';
 
   Future<Either<ErrorModel, SignupResponseModel>> displayProfileInfo() async {
     try {
-      final ref = firestore.collection('users').doc(
-          await SecureStorageHelper.getSecuredString(AppConstant.userToken));
+      final ref = firestore.collection(collectionName).doc(await token);
       final snapshot = await ref.get();
       if (snapshot.exists) {
         Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
@@ -42,8 +44,7 @@ class ProfileRepo {
 
   Future<Either<ErrorModel, String>> updateName(String newName) async {
     try {
-      final ref = firestore.collection('users').doc(
-          await SecureStorageHelper.getSecuredString(AppConstant.userToken));
+      final ref = firestore.collection(collectionName).doc(await token);
       await ref.update({
         'name': newName,
       });
@@ -55,8 +56,7 @@ class ProfileRepo {
 
   Future<Either<ErrorModel, String>> updatePhoneNumber(String phone) async {
     try {
-      final ref = firestore.collection('users').doc(
-          await SecureStorageHelper.getSecuredString(AppConstant.userToken));
+      final ref = firestore.collection(collectionName).doc(await token);
       await ref.update({'phone': phone});
       return right('Updated success');
     } catch (e) {
@@ -67,8 +67,7 @@ class ProfileRepo {
   Future<Either<ErrorModel, File?>> pickImage(ImageSource source) async {
     File? image;
     try {
-      final pickedFile =
-          await ImagePicker().pickImage(source: source);
+      final pickedFile = await ImagePicker().pickImage(source: source);
       if (pickedFile != null) {
         image = File(pickedFile.path);
         return right(image);
@@ -83,18 +82,15 @@ class ProfileRepo {
     try {
       String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
       final refStoarge =
-          FirebaseStorage.instance.ref().child('users/$fileName');
+          FirebaseStorage.instance.ref().child('$collectionName/$fileName');
       UploadTask uploadTask = refStoarge.putFile(imageFile);
       TaskSnapshot taskSnapshot = await uploadTask;
       String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-      final userToken =
-          await SecureStorageHelper.getSecuredString(AppConstant.userToken);
-      if (userToken == null) {
+
+      if (token == null) {
         return left(FirebaseStorageFailure('User not found'));
       }
-      final userRef = firestore
-          .collection('users')
-          .doc(userToken);
+      final userRef = firestore.collection('users').doc(token);
       await userRef.update({'image': downloadUrl});
       return right(downloadUrl);
     } catch (error) {
