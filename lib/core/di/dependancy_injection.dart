@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:hero_store_app/core/helpers/shared_pref_helper.dart';
 import 'package:hero_store_app/core/networking/api/api_services.dart';
 import 'package:hero_store_app/core/networking/api/dio_factory.dart';
-import 'package:hero_store_app/features/account/logic/cubits/cubit/image_cubit.dart';
 import 'package:hero_store_app/features/cart/logic/add_carts_cubit.dart';
 import 'package:hero_store_app/features/wishList/logic/cubit/favorites_cubit.dart';
 import 'package:hero_store_app/features/products/data/repo/products_repo.dart';
@@ -46,7 +45,7 @@ Future<void> setUpGetIt() async {
 
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo());
   getIt.registerFactory<ProfileInfoCubit>(() => ProfileInfoCubit(getIt()));
-  // getIt.registerFactory<ImageCubit>(() => ImageCubit(getIt()));
+
 // favorites
 
   getIt.registerFactory<FavoritesCubit>(() => FavoritesCubit());

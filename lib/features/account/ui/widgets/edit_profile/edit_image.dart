@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hero_store_app/core/theming/app_colors.dart';
 import 'package:hero_store_app/features/account/logic/cubits/profile_info_cubit.dart';
+import 'package:hero_store_app/features/account/ui/widgets/edit_profile/choose_image_dialog.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditImage extends StatelessWidget {
   const EditImage({super.key, required this.image});
@@ -43,17 +46,27 @@ class EditImage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : AppColors.primaryColor,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.grey.shade300),
                 ),
                 child: IconButton(
                   onPressed: () async {
                     final cubit = context.read<ProfileInfoCubit>();
-                    await cubit.pickImage();
-                    if (cubit.image != null) {
-                      await cubit.updateUserImage();
-                    }
+                    showChooseImageDialog(
+                      context: context,
+                      cameraOnTap: () async {
+                        await cubit.pickImage(ImageSource.camera);
+                        // ignore: use_build_context_synchronously
+                        Navigator.pop(context);
+                      },
+                      galleryOnTap: () async {
+                        await cubit.pickImage(ImageSource.gallery);
+                        // ignore: use_build_context_synchronously
+                        Navigator.pop(context);
+                      },
+                    );
                   },
                   icon: const Icon(Icons.camera_alt),
                   color: Colors.blue,

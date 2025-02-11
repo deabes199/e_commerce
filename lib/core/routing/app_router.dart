@@ -6,7 +6,6 @@ import 'package:hero_store_app/nav_bar/logic/cubit/nav_bar_cubit.dart';
 import 'package:hero_store_app/nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:hero_store_app/core/di/dependancy_injection.dart';
 import 'package:hero_store_app/core/routing/routes.dart';
-import 'package:hero_store_app/features/account/logic/cubits/cubit/image_cubit.dart';
 import 'package:hero_store_app/features/cart/ui/screens/cart_screen.dart';
 import 'package:hero_store_app/features/cart/logic/add_carts_cubit.dart';
 import 'package:hero_store_app/features/wishList/logic/cubit/favorites_cubit.dart';
@@ -29,7 +28,6 @@ import 'package:hero_store_app/features/signup/ui/screen/signup_screen.dart';
 import 'package:hero_store_app/features/wishList/ui/screen/wishlist_screen.dart';
 
 class AppRouter {
-  
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.productDetailScreen:
@@ -96,12 +94,8 @@ class AppRouter {
                     BlocProvider(
                       create: (context) => getIt<ProfileInfoCubit>(),
                     ),
-                    // BlocProvider(
-                    //   create: (context) =>
-                    //       getIt<ImageCubit>(),
-                    // ),
                   ],
-                  child:  EditProfileScreen(user:user),
+                  child: EditProfileScreen(user: user),
                 ));
 
       case Routes.wishlistScreen:
@@ -113,18 +107,18 @@ class AppRouter {
 
       case Routes.loginScreen:
         return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => getIt<LoginCubit>(),
-                    ),
-                  ],
-                  child: const LoginScreen(),
-                ));
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: const LoginScreen(),
+          ),
+        );
 
       case Routes.signupScreen:
         return MaterialPageRoute(
-          builder: (context) => const SignupScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: const SignupScreen(),
+          ),
         );
 
       case Routes.forgotPasswordScreen:
@@ -135,26 +129,18 @@ class AppRouter {
                 ));
 
       case Routes.profileScreen:
-        final signupResponse = settings.arguments as SignupResponseModel;
         return MaterialPageRoute(
-          builder: (context) => ProfileScreen(),
+          builder: (context) => const ProfileScreen(),
         );
 
       case Routes.profileDetailsScreen:
         return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) =>
-                          getIt<ProfileInfoCubit>()..displayProfileInfo(),
-                    ),
-                    // BlocProvider(
-                    //   create: (context) =>
-                    //       getIt<ImageCubit>(),
-                    // ),
-                  ],
-                  child: const ProfileDetailsScreen(),
-                ));
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getIt<ProfileInfoCubit>()..displayProfileInfo(),
+            child: const ProfileDetailsScreen(),
+          ),
+        );
 
       default:
         const Scaffold(
@@ -187,6 +173,6 @@ class AppRouter {
       child: const ProductsScreen(),
     ),
     const CartScreen(),
-     ProfileScreen()
+    ProfileScreen()
   ];
 }

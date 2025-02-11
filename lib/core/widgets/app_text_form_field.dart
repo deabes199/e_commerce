@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hero_store_app/core/theming/text_style.dart';
-import 'package:hero_store_app/core/theming/theme_mode.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({

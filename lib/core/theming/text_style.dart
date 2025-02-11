@@ -12,11 +12,9 @@ class TextStyles {
     fontWeight: FontWeight.w500,
   );
   static TextStyle font16GrayNormal = TextStyle(
-
     fontSize: 16.sp,
     color: AppColors.grayColor,
     fontWeight: FontWeight.normal,
-    
   );
   static TextStyle font14BlackNormal = TextStyle(
     fontSize: 14.sp,

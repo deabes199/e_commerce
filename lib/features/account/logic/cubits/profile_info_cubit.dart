@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hero_store_app/features/account/data/profile_repo.dart';
 import 'package:hero_store_app/features/signup/data/models/signup_response_model.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
 part 'profile_info_state.dart';
@@ -21,13 +22,17 @@ class ProfileInfoCubit extends Cubit<ProfileInfoState> {
   File? image;
   String imageUrll = '';
 
-  pickImage() async {
-    final response = await profileRepo.pickImage();
+  pickImage(ImageSource source) async {
+    final response = await profileRepo.pickImage(source);
+
     response.fold((error) {
       emit(UpdateProfileImageFaliure(message: error.message));
+  
     }, (imageFile) {
       image = imageFile;
       emit(PickImageSuccess(image: image));
+          updateUserImage();
+
     });
   }
 

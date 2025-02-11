@@ -10,7 +10,6 @@ import 'package:hero_store_app/core/routing/app_router.dart';
 import 'package:hero_store_app/core/routing/routes.dart';
 import 'package:hero_store_app/core/theming/cubit/theme_cubit.dart';
 import 'package:hero_store_app/core/theming/theme_mode.dart';
-import 'package:hero_store_app/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:hero_store_app/firebase_options.dart';
 
 bool isLoggedInUser = false;
@@ -43,16 +42,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
+    return 
+        
           BlocProvider(
             create: (context) => ThemeCubit(),
-          ),
-           BlocProvider(
-            create: (context) => getIt<SignupCubit>(),
-          ),
+          
+      
        
-        ],
+        
         child: ScreenUtilInit(
             designSize: const Size(375, 812),
             splitScreenMode: true,

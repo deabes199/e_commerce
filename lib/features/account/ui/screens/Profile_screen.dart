@@ -42,16 +42,7 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.pushNamed(context, Routes.wishlistScreen);
                   },
                 ),
-                CustomListTile(
-                  iconData: Icons.edit,
-                  title: 'Edit Profile',
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      Routes.editProfileScreen,
-                    );
-                  },
-                ),
+                
                 CustomListTile(
                   iconData: Icons.mode_night,
                   title: 'Change Theme',

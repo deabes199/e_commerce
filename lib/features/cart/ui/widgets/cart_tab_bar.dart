@@ -16,10 +16,10 @@ class CartTabBar extends StatelessWidget {
           children: [
             Text(
               'Carts ',
-              style: TextStyles.font20BlackBold,
+              style: TextStyles.font20BlackBold.copyWith(fontSize: 24),
             ),
             context.read<AddCartsCubit>().cartList.isEmpty
-                ? Container()
+                ? const SizedBox.shrink()
                 : TextButton(
                     onPressed: () {
                       context.read<AddCartsCubit>().clearFromCart();

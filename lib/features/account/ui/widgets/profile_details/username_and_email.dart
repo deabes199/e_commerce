@@ -19,7 +19,7 @@ class UserNameAndEmail extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.editProfileScreen,
+                    Navigator.pushReplacementNamed(context, Routes.editProfileScreen,
                         arguments: user);
                   },
                   icon: const Icon(Icons.edit)),

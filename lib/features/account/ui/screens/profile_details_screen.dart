@@ -22,6 +22,7 @@ class ProfileDetailsScreen extends StatelessWidget {
                         context.pop();
                       },
                       icon: const Icon(Icons.arrow_back_ios)),
+                  const Spacer(),
                   const Center(
                     child: Text(
                       'Profile Details',
@@ -29,6 +30,7 @@ class ProfileDetailsScreen extends StatelessWidget {
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                   ),
+                  const Spacer()
                 ],
               ),
               vertcalSpace(20),

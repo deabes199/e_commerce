@@ -64,11 +64,11 @@ class ProfileRepo {
     }
   }
 
-  Future<Either<ErrorModel, File?>> pickImage() async {
+  Future<Either<ErrorModel, File?>> pickImage(ImageSource source) async {
     File? image;
     try {
       final pickedFile =
-          await ImagePicker().pickImage(source: ImageSource.camera);
+          await ImagePicker().pickImage(source: source);
       if (pickedFile != null) {
         image = File(pickedFile.path);
         return right(image);
