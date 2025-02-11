@@ -26,16 +26,16 @@ class SignupCubit extends Cubit<SignupState> {
 
       if (pickedFile != null) {
         File imageFile = File(pickedFile.path);
-        print("✅ Selected image path: ${imageFile.path}");
+       
         selectedImage = imageFile;
 
-        emit(PickImageSuccess(image: selectedImage!)); // ✅ لن يكون null
+        emit(PickImageSuccess(image: selectedImage!)); 
       } else {
-        print("⚠️ No image selected.");
+        
         emit(PickImageFailure(error: "No image selected"));
       }
     } catch (e) {
-      print("❌ Error picking image: $e");
+
       emit(PickImageFailure(error: e.toString()));
     }
   }
