@@ -9,6 +9,8 @@ class AssetsManager {
   static String notFound = 'assets/images/not_found.jpg';
 
   static String searchIcon = 'assets/images/search-icon-png-7.jpg';
+    static String defaultUser = 'assets/images/user.jpg';
+  
 
   static String defaultprofileImage =
       'https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png';

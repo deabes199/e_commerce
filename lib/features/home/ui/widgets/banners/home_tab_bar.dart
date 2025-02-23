@@ -12,9 +12,17 @@ class HomeTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundImage: CachedNetworkImageProvider(user.image),
+        CachedNetworkImage(
+          imageUrl: user.image,
+          imageBuilder: (context, imageProvider) => CircleAvatar(
+            radius: 30,
+            backgroundImage: imageProvider,
+          ),
+          // placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(
+            Icons.error,
+            color: Colors.red,
+          ),
         ),
         horzintalSpace(6),
         Column(
@@ -34,4 +42,3 @@ class HomeTabBar extends StatelessWidget {
     );
   }
 }
-

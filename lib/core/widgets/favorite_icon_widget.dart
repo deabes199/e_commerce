@@ -5,8 +5,9 @@ import 'package:hero_store_app/features/products/data/models/product_model.dart'
 import 'package:hero_store_app/features/wishList/logic/cubit/favorites_cubit.dart';
 
 class FavoriteIcon extends StatelessWidget {
-  const FavoriteIcon({super.key, required this.product});
+  const FavoriteIcon({super.key, required this.product, this.height, this.width});
   final Product product;
+  final double? height, width;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,8 @@ class FavoriteIcon extends StatelessWidget {
         context.read<FavoritesCubit>().addProductInfavorite(product);
       },
       child: Container(
-        height: 50,
-        width: 50,
+        height: height??50,
+        width:width?? 50,
         decoration: BoxDecoration(
           color: AppColors.lighterGray,
           borderRadius: BorderRadius.circular(25),

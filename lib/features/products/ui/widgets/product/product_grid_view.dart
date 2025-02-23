@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero_store_app/core/routing/routes.dart';
 import 'package:hero_store_app/features/products/data/models/product_model.dart';
-import 'package:hero_store_app/features/home/ui/widgets/some_product/product_item.dart';
+import 'package:hero_store_app/features/home/ui/widgets/all_product/product_item.dart';
 
 class ProductsGridView extends StatelessWidget {
   const ProductsGridView({super.key, required this.productList});

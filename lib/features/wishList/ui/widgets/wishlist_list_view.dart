@@ -15,7 +15,7 @@ class WishlistListView extends StatelessWidget {
             ? Column(
                 children: [
                   vertcalSpace(100),
-                  Image.asset('assets/images/aa.jpg')
+                  Image.asset('assets/images/not_found.jpg')
                 ],
               )
             : Expanded(
@@ -33,4 +33,3 @@ class WishlistListView extends StatelessWidget {
     );
   }
 }
-

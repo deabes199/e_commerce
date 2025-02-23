@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hero_store_app/core/helpers/spacing.dart';
 import 'package:hero_store_app/features/home/logic/home_cubit/home_cubit.dart';
 import 'package:hero_store_app/features/home/ui/widgets/banners/tab_bar_bloc_builder.dart';
-import 'package:hero_store_app/features/home/ui/widgets/some_product/product_text.dart';
-import 'package:hero_store_app/features/home/ui/widgets/some_product/all_product_bloc_builder.dart';
+import 'package:hero_store_app/features/home/ui/widgets/all_product/product_text.dart';
+import 'package:hero_store_app/features/home/ui/widgets/all_product/all_product_bloc_builder.dart';
 import 'package:hero_store_app/features/home/ui/widgets/banners/home_banners.dart';
 import 'package:hero_store_app/features/wishList/logic/cubit/favorites_cubit.dart';
 

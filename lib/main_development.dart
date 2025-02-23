@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => ThemeCubit(),
+            create: (context) => ThemeCubit()
           ),
         ],
         child: ScreenUtilInit(
